@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Flex, NavBar, Button, WingBlank, List, InputItem } from 'antd-mobile'
+import { Flex, NavBar, Button, WingBlank, List, InputItem, Toast } from 'antd-mobile'
 import 'antd-mobile/dist/antd-mobile.css'
 import './login.css'
+import axios from '../utils/http.js'
+
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -12,8 +14,22 @@ class Login extends Component {
     }
     changeInputVal = (key, val) => {
         this.setState({
+            // ES6-> 对象的key是变量  [key]
             [key]: val
         })
+    }
+    // 点击登录按钮
+     handleLogin = async () => {
+        const { data, meta: { status, msg }} = await axios.post('/users/login', {
+            uname: this.state.uname,
+            pwd: this.state.pwd
+        })
+        if (status === 200) {
+            // 如果组件是路由匹配到的,此时props
+            const { history } = this.props
+            history.push('/')
+        }
+        Toast.fail(msg, 3)
     }
     render() {
         return <div>
@@ -31,7 +47,7 @@ class Login extends Component {
                     this.changeInputVal('pwd', val)
                 }}>密码</InputItem>
                 </List>
-                <Button type="primary">登录</Button>
+                <Button type="primary" onClick={this.handleLogin}>登录</Button>
             </Flex.Item>
             </Flex>
           </WingBlank>
