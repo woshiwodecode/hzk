@@ -28,6 +28,7 @@ class Login extends Component {
             // 如果组件是路由匹配到的,此时props
             const { history } = this.props
             history.push('/')
+            window.localStorage.setItem('token', data.token)
         }
         Toast.fail(msg, 3)
     }

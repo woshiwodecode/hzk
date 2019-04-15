@@ -6,7 +6,14 @@ axios.defaults.baseURL = `http://127.0.0.1:8086`
 axios.interceptors.request.use(
     function(config) {
       // 在发送请求之前做些什么
-      return config
+      if(config.url === '/login' || config.url === 'homes/swipe'){
+        return config
+      }else {
+        const token = window.localStorage.getItem('token')
+        config.headers.Authorization = token
+        return config
+      }
+
     },
     function(error) {
       // 对请求错误做些什么
