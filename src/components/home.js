@@ -1,16 +1,69 @@
 import React, { Component } from 'react'
 import { TabBar, ListView } from 'antd-mobile'
 
+import Main from './main/main'
+import News from './news/news'
+import Chat from './chat/chat'
+import Mine from './mine/mine'
+
+import { tabBarTemplateData } from './tabbardata.json'
 class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedTab: 'blueTab',
+            selectedTab: 'main',
             hidden: false,
         }
     }
+    renderContent(selectKey) {
+        // 判断变化的值->selectKey |
+        const key = this.state.selectedTab
+        switch (key) {
+          case 'main':
+            return <Main />
+            break
+          case 'news':
+            return <News />
+            break
+          case 'chat':
+            return <Chat />
+            break
+          case 'mine':
+            return <Mine />
+            break
 
+          default:
+            break
+        }
+      }
     render() {
+        const tabBarTemplate = tabBarTemplateData.map((item, i) => {
+            return <TabBar.Item
+            title={item.title}
+            key={i}
+            icon={<div style={{
+              width: '22px',
+              height: '22px',
+              background: `${item.icon_bg_url}`}}
+            />
+            }
+            selectedIcon={<div style={{
+              width: '22px',
+              height: '22px',
+              background: `${item.selectedIcon_bg_url}`}}
+            />
+            }
+            selected={this.state.selectedTab === item.selectedPath}
+            // badge={1}
+            onPress={() => {
+              this.setState({
+                selectedTab:  `${item.selectedPath}`,
+              });
+            }}
+          >
+          {this.renderContent(item.key)}
+          </TabBar.Item>
+        })
         return  <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
           unselectedTintColor="#949494"
@@ -20,31 +73,7 @@ class Home extends Component {
           hidden={this.state.hidden}
           prerenderingSiblingsNumber={0}
         >
-          <TabBar.Item
-            title="Life"
-            key="Life"
-            icon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-            />
-            }
-            selectedIcon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-            />
-            }
-            selected={this.state.selectedTab === 'blueTab'}
-            badge={1}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'blueTab',
-              });
-            }}
-            data-seed="logId"
-          >
-          </TabBar.Item>
+        {tabBarTemplate}
         </TabBar>
       </div>
     }
