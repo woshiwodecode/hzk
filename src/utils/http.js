@@ -10,7 +10,7 @@ axios.interceptors.request.use(
         return config
       }else {
         const token = window.localStorage.getItem('token')
-        config.headers.Authorization = token
+        config.headers.Authorization = token // 请求头需要带token认证
         return config
       }
 

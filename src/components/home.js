@@ -20,7 +20,7 @@ class Home extends Component {
         const key = this.state.selectedTab
         switch (key) {
           case 'main':
-            return <Main />
+            return <Main history={this.props.history}/>
             break
           case 'news':
             return <News />
