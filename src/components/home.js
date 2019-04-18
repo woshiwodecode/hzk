@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TabBar, ListView } from 'antd-mobile'
+import { TabBar } from 'antd-mobile'
 
 import Main from './main/main'
 import News from './news/news'
@@ -11,11 +11,11 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedTab: 'main',
+            selectedTab: 'news',
             hidden: false,
         }
     }
-    renderContent(selectKey) {
+    renderContent(tabTitle) {
         // 判断变化的值->selectKey |
         const key = this.state.selectedTab
         switch (key) {
@@ -23,7 +23,7 @@ class Home extends Component {
             return <Main history={this.props.history}/>
             break
           case 'news':
-            return <News />
+            return <News title={tabTitle}/>
             break
           case 'chat':
             return <Chat />
@@ -61,7 +61,7 @@ class Home extends Component {
               });
             }}
           >
-          {this.renderContent(item.key)}
+          {this.renderContent(item.title)}
           </TabBar.Item>
         })
         return  <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>

@@ -1,0 +1,41 @@
+.am-card-header-content {
+    -webkit-flex: 1;
+    flex: .4 .6 !important;
+    text-align: left;
+    color: #000;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .am-segment-item {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+    flex: 1 1;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #108ee9;
+    font-size: 14px;
+    line-height: 1;
+    transition: background .2s;
+    position: relative;
+    border: 1PX solid #bbb !important;
+    width: 100%;
+    box-sizing: border-box;
+    border-left-width: 0;
+  }
+
+  .am-list-item .am-input-label {
+    color: #000;
+    font-size: 17px;
+    margin-left: 0;
+    margin-right: 24px !important;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 2px 0;
+  }

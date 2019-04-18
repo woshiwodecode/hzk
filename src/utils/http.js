@@ -13,7 +13,6 @@ axios.interceptors.request.use(
         config.headers.Authorization = token // 请求头需要带token认证
         return config
       }
-
     },
     function(error) {
       // 对请求错误做些什么

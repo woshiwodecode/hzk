@@ -100,6 +100,7 @@ class Main extends Component {
   }
   // 处理房屋信息返回数据
   changeHouseData = (arr, ...rest) => {
+    console.log(rest)
     let arres = []
     for (let index = 0; index < rest.length; index++) {
       const temp = arr.splice(0, rest[index])
@@ -109,8 +110,9 @@ class Main extends Component {
   }
   // 点击菜单
   clickMenu = (el, index) => {
-    console.log(el, index)
+    // console.log(el, index)
     const { id, text } = el
+    const { history } = this.props
     switch (id) {
       case 1:
       case 2:
@@ -120,9 +122,14 @@ class Main extends Component {
         // 必须用history-<main.js没有
         // <-1. main.js改路由匹配的组件:可以改->tabbar没有
         // <-2. home是路由匹配的-把history传递到main
-        const { history } = this.props
+
         history.push('/detail', { params: { title: text, home_type: id } })
         break
+      case 5:
+        history.push('/map', { params: { title: text, home_type: id } })
+        break
+      case 7:
+        history.push('/cal', { params: { title: text, home_type: id } })
 
         default:
         break
