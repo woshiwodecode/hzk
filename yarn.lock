@@ -8393,6 +8393,11 @@ react-scripts@2.1.8:
   optionalDependencies:
     fsevents "1.2.4"
 
+react-touch-loader@^1.1.4:
+  version "1.1.4"
+  resolved "http://registry.npm.taobao.org/react-touch-loader/download/react-touch-loader-1.1.4.tgz#ccd49012b645d2492113178684f9f4ecae742ab6"
+  integrity sha1-zNSQErZF0kkhExeGhPn07K50KrY=
+
 react-tween-state@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/react-tween-state/-/react-tween-state-0.1.5.tgz#e98b066551efb93cb92dd1be14995c2e3deae339"

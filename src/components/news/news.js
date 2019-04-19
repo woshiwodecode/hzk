@@ -9,18 +9,37 @@ class News extends Component {
     super(props)
     this.state = {}
   }
+  changeTab = (tab, index) => {
+    switch(index) {
+      case 0:
+      this.tab1(1)
+      break
+
+      case 1:
+        this.tab2(2)
+        break
+
+      case 2:
+        this.tab3(3)
+        break
+      default:
+        break
+
+    }
+  }
+  tab1 = (type) => {
+    return <Loader type={type} />
+  }
+  tab2 = (type) => {
+    return <Loader type={type} />
+  }
+  tab3 = (type) => {
+    return <Loader type={type} />
+  }
   render() {
     const { title } = this.props
-    const Tab1 = () => {
-      return <Loader type={1} />
-    }
-    const Tab2 = () => {
-      return <Loader type={2} />
-    }
-    const Tab3 = () => {
-      return <Loader type={3} />
-    }
-    return <div>
+
+    return <div  style={{ height: '100%' }}>
       {/* 导航 */}
       <NavBar mode="light">
           <span>{title}</span>
@@ -30,13 +49,13 @@ class News extends Component {
         tabs={tabs}
         initialPage={0}
         onChange={(tab, index) => {
-          console.log('onChange', index, tab)
+          this.changeTab(tab, index)
         }}
         onTabClick={(tab, index) => {}}
       >
-        <Tab1 />
-        <Tab2 />
-        <Tab3 />
+        {this.tab1(1)}
+        {this.tab2(2)}
+        {this.tab3(3)}
       </Tabs>
     </div>
   }

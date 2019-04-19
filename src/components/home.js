@@ -11,7 +11,7 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedTab: 'news',
+            selectedTab: 'chat',
             hidden: false,
         }
     }
@@ -26,7 +26,7 @@ class Home extends Component {
             return <News title={tabTitle}/>
             break
           case 'chat':
-            return <Chat />
+            return <Chat title={tabTitle} />
             break
           case 'mine':
             return <Mine />
