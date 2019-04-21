@@ -4,11 +4,16 @@ import axios from '../../utils/http'
 import './chatwindow.css'
 
 const Chatlist = props => {
+  // 取出当前用户的uid
+  const uid = window.localStorage.getItem('uid')
   // 详情聊天列表
   let list = props.listContent.map(item => {
     // console.log(item.from_user)
     return (
-      <li key={item.id} className={'chat-info-left'}>
+      <li key={item.id}
+      className={
+        // 判断聊天信息左浮动还是右浮动
+        item.from_user !== uid * 1 ? 'chat-info-left' : 'chat-info-right'}>
         <img src={'http://127.0.0.1:8086/' + item.avatar} alt="" />
         {/* <span className={'name'}>{item.chat_msg}</span> */}
         <span className={'info'}>{item.chat_msg}</span>
@@ -47,7 +52,7 @@ class ChatWindow extends Component {
       from_user,
       to_user
     })
-    console.log(data)
+    // console.log(data)
     this.setState({
       listdata: data.list
     })

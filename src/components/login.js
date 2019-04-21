@@ -29,6 +29,7 @@ class Login extends Component {
             const { history } = this.props
             history.push('/')
             window.localStorage.setItem('token', data.token)
+            window.localStorage.setItem('uid', data.uid) // 在聊天页判断当前发送信息者是否为登陆者本身
         }
         Toast.fail(msg, 3)
     }
