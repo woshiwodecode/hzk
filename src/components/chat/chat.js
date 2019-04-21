@@ -34,7 +34,8 @@ class Chat extends Component {
   showChatwindow = item => {
     console.log(item)
     this.setState({
-      isShow: true
+      isShow: true,
+      item
     })
   }
 
@@ -48,7 +49,7 @@ class Chat extends Component {
     const { title } = this.props
     console.log(this.props)
     const listContet = this.state.list.map(item => {
-      console.log(item)
+      // console.log(item)
       return (
         <li key={item.id} onClick={this.showChatwindow.bind(this, item)}>
           <div className="avarter">
@@ -63,7 +64,7 @@ class Chat extends Component {
     return (
 
       <div>
-        {this.state.isShow && <ChatWindow changeIsShow={this.changeIsShow} />}
+        {this.state.isShow && <ChatWindow changeIsShow={this.changeIsShow} item={this.state.item}/>}
         <NavBar mode="light">
           <span>{title}</span>
         </NavBar>

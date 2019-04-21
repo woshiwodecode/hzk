@@ -42,6 +42,7 @@ const NewsOrTopComponent = props => {
 
 const AnswerCom = props => {
   const { list, changeHasMore } = props
+  // 初始化模态框
   const prompt = Modal.prompt
   const showModal = () => {
     prompt(
@@ -184,6 +185,7 @@ class Loader extends Component {
       }
     )
   }
+
   async componentDidMount () {
     const { type } = this.props
     this.setState({

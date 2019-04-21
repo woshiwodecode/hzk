@@ -28,14 +28,26 @@ class ChatWindow extends Component {
     }
   }
 
+  getData = async () => {
+    const data = await axios.post('/chats/info')// 请求体？
+    return data
+  }
+
   backtochat = () => {
     const { changeIsShow } = this.props
-    console.log(changeIsShow)
+    // console.log(changeIsShow)
     changeIsShow(false)
   }
 
   componentDidMount = async () => {
+    console.log(this.props)
+    const {item: {username}} = this.props
+    this.setState({
+      currUserName: username
+    })
     // 获取聊天内容数据
+    // const data = await this.getData()
+    // console.log(data)
 
   }
   // 聊天关闭
