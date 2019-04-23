@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = `http://127.0.0.1:8086`
+axios.defaults.baseURL = `http://47.96.21.88:8086`
 
 // 添加请求拦截器
 axios.interceptors.request.use(

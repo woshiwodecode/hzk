@@ -128,6 +128,12 @@ class ChatWindow extends Component {
       msgContent: v
     })
   }
+
+  componentWillUnmount() {
+    this.setState = state => {
+      return
+    }
+  }
   render() {
     return (
       <div className="chat-window">

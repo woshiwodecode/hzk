@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile'
+import { withRouter } from 'react-router-dom'
 
 import Main from './main/main'
 import News from './news/news'
@@ -11,7 +12,7 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedTab: 'mine',
+            selectedTab: 'main',
             hidden: false,
         }
     }
@@ -78,5 +79,11 @@ class Home extends Component {
       </div>
     }
 }
+/*
+react-rotuer-dom路由->有一个组件WithRouter
 
-export default Home
+WithRouter->作用->为任何组件提供路由相关对象,比如location , history
+
+使用路由相关对象history的组件,本身又不是Route匹配的,此时使用withRouter
+*/
+export default withRouter(Home)

@@ -44,7 +44,11 @@ class Chat extends Component {
       isShow: argv
     })
   }
-
+  componentWillUnmount() {
+    this.setState = state => {
+      return
+    }
+  }
   render() {
     const { title } = this.props
     console.log(this.props)
@@ -53,7 +57,7 @@ class Chat extends Component {
       return (
         <li key={item.id} onClick={this.showChatwindow.bind(this, item)}>
           <div className="avarter">
-            <img src={'http://127.0.0.1:8086/'+item.avatar} alt="avarter" />
+            <img src={item.avatar} alt="avarter" />
             <span className="name">{item.username}</span>
             <span className="info">{item.chat_msg}</span>
             <span className="time">{item.ctime}</span>

@@ -60,14 +60,27 @@ class ModalCoreImage extends Component {
     this.state = {
       ModalCoreImage: true,
       file: null,
-      scale: null
+      scale: 1
     }
 
   }
-  onClose = () => {
+  // 1.创建ref标识
+  setEditorRef = editor => (this.editor = editor)
+  // 3.获取组件对应的dom元素->onClose方法里面
+  onClose = async () => {
     const { closeModal2 } = this.props
-
-    closeModal2()
+    if (this.editor) {
+      // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
+      const canvasScaled = this.editor.getImageScaledToCanvas()
+      // 接下来是canvas的dom操作的方法->canvasAPI->获取图片数据的方法
+      const resImage = canvasScaled.toDataURL()
+      // console.log(resImage)
+      // 4. 更新头像
+      await axios.post(`/my/avatar`, {
+        avatar: resImage
+      })
+      closeModal2(resImage)
+    }
 
   }
   componentDidMount () {
@@ -81,6 +94,7 @@ class ModalCoreImage extends Component {
       scale: scale * 0.1
     })
   }
+
   render () {
     return (
       <Modal
@@ -97,6 +111,7 @@ class ModalCoreImage extends Component {
           wrapProps={{ onTouchStart: this.onWrapTouchStart }}
         >
           <AvatarEditor
+            ref={this.setEditorRef}
             image={this.state.file}
             width={150}
             height={150}
@@ -125,6 +140,7 @@ class Mine extends Component {
       isShow1: false,
       isShow2: false,
       file: null,
+      avatarPath: '',
       data: Array.from(new Array(6)).map((_val, i) => ({
         icon:
           'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
@@ -142,12 +158,18 @@ class Mine extends Component {
         text: gridtext[i]
       }
     })
-
+    const uid = localStorage.getItem('uid')
+    const {
+      data: { username, avatar }
+    } = await axios.post(`my/info`, {
+      user_id: uid
+    })
     this.setState({
-      data
+      uname: username,
+      data,
+      avatarPath: avatar
     })
   }
-
   showImageModal = () => {
     this.setState({
       isShow1: true
@@ -160,10 +182,16 @@ class Mine extends Component {
       isShow2: file
     })
   }
-  closeModal2 = () => {
+  closeModal2 = (resImage) => {
     this.setState({
-      isShow2: false
+      isShow2: false,
+      avatarPath: resImage
     })
+  }
+   componentWillUnmount() {
+    this.setState = state => {
+      return
+    }
   }
   render() {
     return (
@@ -177,6 +205,7 @@ class Mine extends Component {
             <div className="myicon">
               <img
                 onClick={this.showImageModal}
+                // 拿到子组件传来的路径
                 src={this.state.avatarPath}
                 alt="icon"
               />
